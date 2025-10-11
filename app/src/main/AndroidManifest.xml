@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Learnly"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Declaration for LoginActivity -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+
+        <!-- Declaration for RegisterActivity -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+
+        <!-- Declaration for com.example.learnly.HomeActivity (your main content after auth) -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+        <activity
+            android:name=".StoryTimeActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+    </application>
+
+</manifest>
