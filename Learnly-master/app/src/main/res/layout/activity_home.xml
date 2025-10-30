@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app_gradient"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="16dp">
+
+        <!-- App name centered near the top (subtle, like the mock) -->
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="KidsLearn App"
+            android:textSize="12sp"
+            android:textColor="#6E6E6E"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+        <!-- Big title with sparkles -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="✨  Learning Hub  ✨"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#111111"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/appName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="8dp"/>
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Choose an activity to start learning!"
+            android:textSize="14sp"
+            android:textColor="#6E6E6E"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="4dp"
+            android:paddingBottom="12dp"/>
+
+        <!-- Tiles grid (2 columns) -->
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridTiles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:alignmentMode="alignMargins"
+            app:columnCount="2"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rowCount="3"
+            app:useDefaultMargins="false">
+
+            <!-- ===== Row 1 ===== -->
+
+            <!-- Story Time -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_column="0"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_green_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile1Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Story Time"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile1Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/5 stories"
+                        android:textSize="12sp"
+                        android:textColor="#EAFBF1"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Spelling Fun -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_column="1"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_blue_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile2Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spelling Fun"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile2Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/0 correct"
+                        android:textSize="12sp"
+                        android:textColor="#EAF3FF"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Row 2 ===== -->
+
+            <!-- Memory Match -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_column="0"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_purple_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile3Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Memory Match"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile3Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Level 1"
+                        android:textSize="12sp"
+                        android:textColor="#F5E8FF"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Color Patterns -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_column="1"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_magenta_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile4Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Color Patterns"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile4Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Level 1/10"
+                        android:textSize="12sp"
+                        android:textColor="#FFE5F1"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== Row 3 ===== -->
+
+            <!-- Number Fun -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="2"
+                app:layout_column="0"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_orange_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile5Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number Fun"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile5Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/0 correct"
+                        android:textSize="12sp"
+                        android:textColor="#FFF3E2"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Weekly Quiz -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                app:cardCornerRadius="18dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="#EAEAEA"
+                app:strokeWidth="1dp"
+                app:cardElevation="6dp"
+                app:layout_columnWeight="1"
+                app:layout_row="2"
+                app:layout_column="1"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="14dp"
+                    android:background="@drawable/tile_red_round"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tile6Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly Quiz"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tile6Hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 quizzes taken"
+                        android:textSize="12sp"
+                        android:textColor="#FFE9E9"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <!-- My Progress (teal pill button) add progress app:icon="@drawable/ic_progress_placeholder" and  style="@style/Widget.Material3.Button.Filled"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnProgress"
+
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="My Progress"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="12dp"
+
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="#FFFFFF"
+            app:backgroundTint="#12B886"
+            app:layout_constraintTop_toBottomOf="@id/gridTiles"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Parent Settings (outlined) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnParent"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Parent Settings"
+            android:textAllCaps="false"
+            android:textColor="#333333"
+            app:cornerRadius="12dp"
+            app:strokeColor="#E6E6E6"
+            app:strokeWidth="1dp"
+            app:icon="@drawable/ic_settings_placeholder"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="#333333"
+            app:layout_constraintTop_toBottomOf="@+id/btnProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="655dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
