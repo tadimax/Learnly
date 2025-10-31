@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // UI element variables
     private TextView welcomeTextView;
-    private Button settingsButton, storyButton;
+    private Button settingsButton, storyButton, spellingButton, memoryMatchButton, colourPatternsButton, numberFunButton, weeklyQuizButton;
 
     // Initializes the activity, links UI elements, and loads user data
     @Override
@@ -49,8 +49,16 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         welcomeTextView = findViewById(R.id.welcomeTextView);
+
+        // Find all buttons by their IDs from activity_home.xml
         settingsButton = findViewById(R.id.settingsButton);
         storyButton = findViewById(R.id.storyButton);
+        spellingButton = findViewById(R.id.button2);
+        memoryMatchButton = findViewById(R.id.button3);
+        colourPatternsButton = findViewById(R.id.button4);
+        numberFunButton = findViewById(R.id.button5);
+        weeklyQuizButton = findViewById(R.id.button6);
+
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -59,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             String userId = user.getUid();
             mUserDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
+            // This will now load settings AND update button states
             loadUserSettings();
 
         } else {
@@ -66,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+
+        // --- Set Click Listeners For All Buttons ---
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,25 +92,106 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        spellingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Start SpellingTimeActivity
+                // Intent intent = new Intent(HomeActivity.this, SpellingTimeActivity.class);
+                // startActivity(intent);
+                Log.d(TAG, "Spelling Button Clicked");
+            }
+        });
+
+        memoryMatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Start MemoryMatchActivity
+                // Intent intent = new Intent(HomeActivity.this, MemoryMatchActivity.class);
+                // startActivity(intent);
+                Log.d(TAG, "Memory Match Button Clicked");
+            }
+        });
+
+        colourPatternsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Start ColourPatternsActivity
+                // Intent intent = new Intent(HomeActivity.this, ColourPatternsActivity.class);
+                // startActivity(intent);
+                Log.d(TAG, "Colour Patterns Button Clicked");
+            }
+        });
+
+        numberFunButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Start NumberFunActivity
+                // Intent intent = new Intent(HomeActivity.this, NumberFunActivity.class);
+                // startActivity(intent);
+                Log.d(TAG, "Number Fun Button Clicked");
+            }
+        });
+
+        weeklyQuizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Start WeeklyQuizActivity
+                // Intent intent = new Intent(HomeActivity.this, WeeklyQuizActivity.class);
+                // startActivity(intent);
+                Log.d(TAG, "Weekly Quiz Button Clicked");
+            }
+        });
     }
 
-    // Fetches user settings from Firebase and updates the welcome text
+    // Fetches user settings from Firebase and updates the UI (Welcome Text AND Button States)
     private void loadUserSettings() {
-        mUserDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Use addValueEventListener to get live updates if settings change
+        mUserDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists() && snapshot.hasChild("childName")) {
-                    String childName = snapshot.child("childName").getValue(String.class);
 
+                // 1. Load Child Name for Welcome Message
+                if (snapshot.hasChild("childName")) {
+                    String childName = snapshot.child("childName").getValue(String.class);
                     if (childName != null && !childName.trim().isEmpty()) {
                         welcomeTextView.setText("Hello, " + childName);
+                    } else {
+                        welcomeTextView.setText("Hello");
                     }
+                } else {
+                    welcomeTextView.setText("Hello");
                 }
+
+                // 2. Load Mini-App Settings to Enable/Disable Buttons
+                DataSnapshot appsSnapshot = snapshot.child("miniApps");
+
+                // Check each app. Default to 'true' (enabled) if no setting is found.
+                // (isEnabled == null || isEnabled) means "Enable if the setting doesn't exist OR if it's set to true"
+
+                Boolean storyEnabled = appsSnapshot.child("Story Time").child("enabled").getValue(Boolean.class);
+                storyButton.setEnabled(storyEnabled == null || storyEnabled);
+
+                Boolean spellingEnabled = appsSnapshot.child("Spelling Time").child("enabled").getValue(Boolean.class);
+                spellingButton.setEnabled(spellingEnabled == null || spellingEnabled);
+
+                Boolean matchEnabled = appsSnapshot.child("Memory Match").child("enabled").getValue(Boolean.class);
+                memoryMatchButton.setEnabled(matchEnabled == null || matchEnabled);
+
+                Boolean colourEnabled = appsSnapshot.child("Colour Patterns").child("enabled").getValue(Boolean.class);
+                colourPatternsButton.setEnabled(colourEnabled == null || colourEnabled);
+
+                Boolean numberEnabled = appsSnapshot.child("Number Fun").child("enabled").getValue(Boolean.class);
+                numberFunButton.setEnabled(numberEnabled == null || numberEnabled);
+
+                Boolean quizEnabled = appsSnapshot.child("Weekly Quiz").child("enabled").getValue(Boolean.class);
+                weeklyQuizButton.setEnabled(quizEnabled == null || quizEnabled);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "Failed to load user settings.", error.toException());
+                // In case of error, just leave buttons enabled by default
             }
         });
     }

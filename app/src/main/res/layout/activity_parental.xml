@@ -19,24 +19,142 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/parentalSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Manage Mini-Apps &amp; Difficulty"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parentalTitle" />
-
-    <TextView
+    <Button
+        android:id="@+id/btnSaveParental"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Save Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:text="A list of mini-apps will go here (e.g., in a RecyclerView) to allow toggling them on/off and setting difficulty."
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveParental"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parentalSubtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/parentalTitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@drawable/abc_list_divider_material"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Story Time (Reading)" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchStoryTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerStoryTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Spelling Time" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchSpellingTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerSpellingTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Memory Match (Matching)" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchMemoryMatch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerMemoryMatch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Colour Patterns (Memory)" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchColourPatterns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerColourPatterns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number Fun (Basic Math)" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchNumberFun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerNumberFun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weekly Quiz" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchWeeklyQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerWeeklyQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Parent Email for Reports" />
+            <EditText
+                android:id="@+id/editTextParentalEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="user@example.com"
+                android:inputType="textEmailAddress" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
