@@ -91,12 +91,17 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // --- THIS IS THE UPDATED SECTION ---
         btnManageApps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Opening Manage Apps...");
+                Log.d(TAG, "Opening ParentalActivity...");
+                // Launch the new ParentalActivity
+                Intent i = new Intent(SettingsActivity.this, ParentalActivity.class);
+                startActivity(i);
             }
         });
+        // --- END OF UPDATE ---
 
         btnChangePin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,9 +292,9 @@ public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences getEncryptedPrefs() {
         try {
             String mainKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
-
             return EncryptedSharedPreferences.create(
                     "parent_secure_prefs", mainKeyAlias, this, EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
+
         } catch (Exception e) {
             Log.e(TAG, "Failed to create encrypted preferences", e);
             return null;

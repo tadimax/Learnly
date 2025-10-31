@@ -38,6 +38,9 @@
             android:name=".ForgotPasswordActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <activity
+            android:name=".ParentalActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
+        <activity
             android:name=".SettingsActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <activity
