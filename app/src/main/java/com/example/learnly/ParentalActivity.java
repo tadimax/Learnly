@@ -22,59 +22,44 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-// Manages the Parental Controls screen for mini-apps and difficulty
 public class ParentalActivity extends AppCompatActivity {
-
-    // A tag for identifying log messages from this file
     private static final String TAG = "ParentalActivity";
-
-    // Firebase variables
-    private DatabaseReference mUserNodeRef; // Reference to the entire user's node
-    private DatabaseReference mUserMiniAppsRef; // Reference to the /miniApps sub-node
+    private DatabaseReference user;
+    private DatabaseReference db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
-    // UI element variables
     private SwitchMaterial switchStoryTime, switchSpellingTime, switchMemoryMatch, switchColourPatterns, switchNumberFun, switchWeeklyQuiz;
     private Spinner spinnerStoryTime, spinnerSpellingTime, spinnerMemoryMatch, spinnerColourPatterns, spinnerNumberFun, spinnerWeeklyQuiz;
     private EditText editTextParentalEmail;
     private Button btnSaveParental;
-
-    // Difficulty levels for the spinners
     private final String[] difficultyLevels = {"Easy", "Medium", "Hard"};
-
-    // Initializes the activity and links the layout file
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parental);
         Log.d(TAG, "ParentalActivity created.");
 
-        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser == null) {
             Log.e(TAG, "User is null, cannot load settings.");
-            finish(); // Close activity if no user is logged in
+            finish();
             return;
         }
 
-        // Get database references
-        String userId = currentUser.getUid();
-        mUserNodeRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
-        mUserMiniAppsRef = mUserNodeRef.child("miniApps");
 
-        // Link all UI elements
+        String userId = currentUser.getUid();
+        user = FirebaseDatabase.getInstance().getReference("users").child(userId);
+        db = user.child("miniApps");
+
         initializeUI();
 
-        // Set up all 6 spinners
         setupSpinners();
 
-        // Load the settings from Firebase
         loadParentalSettings();
 
-        // Set listener for the save button
         btnSaveParental.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +68,7 @@ public class ParentalActivity extends AppCompatActivity {
         });
     }
 
-    // Links all 14 UI elements from the XML to the Java variables
+    //Just initializes all XML elements to Java variables
     private void initializeUI() {
         btnSaveParental = findViewById(R.id.btnSaveParental);
         editTextParentalEmail = findViewById(R.id.editTextParentalEmail);
@@ -103,7 +88,7 @@ public class ParentalActivity extends AppCompatActivity {
         spinnerWeeklyQuiz = findViewById(R.id.spinnerWeeklyQuiz);
     }
 
-    // Creates and applies the adapter for all 6 spinners
+    // Makes the spinner adapter and applies it to all subapplications
     private void setupSpinners() {
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,21 +101,18 @@ public class ParentalActivity extends AppCompatActivity {
         spinnerWeeklyQuiz.setAdapter(spinnerAdapter);
     }
 
-    // Loads all settings from the user's node in Firebase
+    // Loads the user settings from Firebase
     private void loadParentalSettings() {
-        mUserNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // 1. Load the email
                 if (snapshot.hasChild("parentEmail")) {
                     String email = snapshot.child("parentEmail").getValue(String.class);
                     editTextParentalEmail.setText(email);
                 } else {
-                    // Pre-fill with their auth email if not set
                     editTextParentalEmail.setText(currentUser.getEmail());
                 }
 
-                // 2. Load the mini-app settings
                 DataSnapshot appsSnapshot = snapshot.child("miniApps");
                 loadAppSetting(appsSnapshot, "Story Time", switchStoryTime, spinnerStoryTime);
                 loadAppSetting(appsSnapshot, "Spelling Time", switchSpellingTime, spinnerSpellingTime);
@@ -150,28 +132,24 @@ public class ParentalActivity extends AppCompatActivity {
     // Helper function to load the settings for a single app
     private void loadAppSetting(DataSnapshot appsSnapshot, String appName, SwitchMaterial appSwitch, Spinner appSpinner) {
         if (appsSnapshot.hasChild(appName)) {
-            // Read "enabled" flag, default to true if not found
+
             Boolean isEnabled = appsSnapshot.child(appName).child("enabled").getValue(Boolean.class);
             appSwitch.setChecked(isEnabled != null && isEnabled);
 
-            // Read "difficulty" string, default to "Easy"
             String difficulty = appsSnapshot.child(appName).child("difficulty").getValue(String.class);
             appSpinner.setSelection(getDifficultyPosition(difficulty));
 
         } else {
-            // Default settings if app node doesn't exist
             appSwitch.setChecked(true);
             appSpinner.setSelection(0); // "Easy"
         }
     }
 
-    // Saves all settings back to the Firebase database
+    // Saves all settings to the Firebase db
     private void saveParentalSettings() {
-        // 1. Save the email
         String email = editTextParentalEmail.getText().toString().trim();
-        mUserNodeRef.child("parentEmail").setValue(email);
+        user.child("parentEmail").setValue(email);
 
-        // 2. Save all the mini-app settings
         Map<String, Object> miniAppsMap = new HashMap<>();
         miniAppsMap.put("Story Time", createAppMapFromUI(switchStoryTime, spinnerStoryTime));
         miniAppsMap.put("Spelling Time", createAppMapFromUI(switchSpellingTime, spinnerSpellingTime));
@@ -180,12 +158,12 @@ public class ParentalActivity extends AppCompatActivity {
         miniAppsMap.put("Number Fun", createAppMapFromUI(switchNumberFun, spinnerNumberFun));
         miniAppsMap.put("Weekly Quiz", createAppMapFromUI(switchWeeklyQuiz, spinnerWeeklyQuiz));
 
-        mUserMiniAppsRef.setValue(miniAppsMap)
+        user.setValue(miniAppsMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Parental controls saved successfully.");
-                        finish(); // Close the activity after saving
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -196,7 +174,6 @@ public class ParentalActivity extends AppCompatActivity {
                 });
     }
 
-    // Helper function to create a Map object from the UI elements
     private Map<String, Object> createAppMapFromUI(SwitchMaterial appSwitch, Spinner appSpinner) {
         Map<String, Object> appSettings = new HashMap<>();
         appSettings.put("enabled", appSwitch.isChecked());
@@ -204,7 +181,6 @@ public class ParentalActivity extends AppCompatActivity {
         return appSettings;
     }
 
-    // Helper function to find the spinner index (0, 1, or 2) from a difficulty string
     private int getDifficultyPosition(String difficulty) {
         if (difficulty == null) return 0;
         switch (difficulty) {

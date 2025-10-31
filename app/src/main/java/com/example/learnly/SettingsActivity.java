@@ -33,18 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-// Manages all logic for the Settings screen
+
 public class SettingsActivity extends AppCompatActivity {
-
-    // A tag for identifying log messages from this file
     private static final String TAG = "SettingsActivity";
-
-    // Firebase authentication and database variables
     private FirebaseAuth mAuth;
-    private DatabaseReference mUserDatabaseRef;
+    private DatabaseReference db;
     private FirebaseUser currentUser;
-
-    // UI element variables
     private TextView settingsTextView;
     private EditText editTextChildName;
     private SwitchMaterial switchWeeklyReport;
@@ -52,7 +46,6 @@ public class SettingsActivity extends AppCompatActivity {
     private Button btnChangePin;
     private Button btnSave;
 
-    // Initializes the activity, links UI elements, and sets click listeners
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
             settingsTextView.setText(currentUser.getEmail() + " Settings");
 
             String userId = currentUser.getUid();
-            mUserDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+            db = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
             loadUserSettings();
 
@@ -91,7 +84,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // --- THIS IS THE UPDATED SECTION ---
         btnManageApps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +93,6 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        // --- END OF UPDATE ---
 
         btnChangePin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +102,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    // Fetches user data (childName, report setting) from Firebase Realtime Database
+    // Gets user data from Firebase
     private void loadUserSettings() {
-        mUserDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -137,7 +128,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    // Saves the current UI settings to the Firebase Realtime Database
+    // Saves the current settings to RealTime Firebase DB
     private void saveUserSettings() {
         String childName = editTextChildName.getText().toString().trim();
         boolean weeklyReportEnabled = switchWeeklyReport.isChecked();
@@ -150,7 +141,7 @@ public class SettingsActivity extends AppCompatActivity {
             userUpdates.put("parentEmail", currentUser.getEmail());
         }
 
-        mUserDatabaseRef.updateChildren(userUpdates)
+        db.updateChildren(userUpdates)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

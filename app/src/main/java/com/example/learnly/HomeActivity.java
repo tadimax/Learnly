@@ -29,19 +29,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 // Manages the main home screen, displays mini-apps, and handles navigation
 public class HomeActivity extends AppCompatActivity {
-
-    // A tag for identifying log messages from this file
     private static final String TAG = "HomeActivity";
-
-    // Firebase authentication and database variables
     private FirebaseAuth mAuth;
-    private DatabaseReference mUserDatabaseRef;
-
-    // UI element variables
+    private DatabaseReference db;
     private TextView welcomeTextView;
     private Button settingsButton, storyButton, spellingButton, memoryMatchButton, colourPatternsButton, numberFunButton, weeklyQuizButton;
 
-    // Initializes the activity, links UI elements, and loads user data
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +43,6 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         welcomeTextView = findViewById(R.id.welcomeTextView);
 
-        // Find all buttons by their IDs from activity_home.xml
         settingsButton = findViewById(R.id.settingsButton);
         storyButton = findViewById(R.id.storyButton);
         spellingButton = findViewById(R.id.button2);
@@ -63,11 +55,8 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             welcomeTextView.setText("Hello");
-
             String userId = user.getUid();
-            mUserDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
-
-            // This will now load settings AND update button states
+            db = FirebaseDatabase.getInstance().getReference("users").child(userId);
             loadUserSettings();
 
         } else {
@@ -76,7 +65,6 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
 
-        // --- Set Click Listeners For All Buttons ---
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,12 +134,12 @@ public class HomeActivity extends AppCompatActivity {
 
     // Fetches user settings from Firebase and updates the UI (Welcome Text AND Button States)
     private void loadUserSettings() {
-        // Use addValueEventListener to get live updates if settings change
-        mUserDatabaseRef.addValueEventListener(new ValueEventListener() {
+
+        db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // 1. Load Child Name for Welcome Message
+
                 if (snapshot.hasChild("childName")) {
                     String childName = snapshot.child("childName").getValue(String.class);
                     if (childName != null && !childName.trim().isEmpty()) {
@@ -163,11 +151,7 @@ public class HomeActivity extends AppCompatActivity {
                     welcomeTextView.setText("Hello");
                 }
 
-                // 2. Load Mini-App Settings to Enable/Disable Buttons
                 DataSnapshot appsSnapshot = snapshot.child("miniApps");
-
-                // Check each app. Default to 'true' (enabled) if no setting is found.
-                // (isEnabled == null || isEnabled) means "Enable if the setting doesn't exist OR if it's set to true"
 
                 Boolean storyEnabled = appsSnapshot.child("Story Time").child("enabled").getValue(Boolean.class);
                 storyButton.setEnabled(storyEnabled == null || storyEnabled);
@@ -191,7 +175,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "Failed to load user settings.", error.toException());
-                // In case of error, just leave buttons enabled by default
             }
         });
     }
