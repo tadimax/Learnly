@@ -33,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "SettingsActivity";
     private FirebaseAuth mAuth;
@@ -68,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
             String userId = currentUser.getUid();
             db = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
-            loadUserSettings();
+            // loadUserSettings(); // <-- REMOVED FROM HERE
 
         } else {
             Log.d(TAG, "User not logged in, redirecting to MainActivity.");
@@ -100,6 +99,16 @@ public class SettingsActivity extends AppCompatActivity {
                 showEnterOldPinDialog();
             }
         });
+    }
+
+    // Refreshes data every time the activity is shown
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Load or refresh settings every time the screen becomes visible
+        if (currentUser != null) {
+            loadUserSettings();
+        }
     }
 
     // Gets user data from Firebase
@@ -265,6 +274,7 @@ public class SettingsActivity extends AppCompatActivity {
                     Log.w(TAG, "New PINs do not match.");
                     showCreateNewPinDialog(prefs);
                 } else {
+                    // This is the part that was missing
                     prefs.edit().putString("parent_pin", pin1).apply();
                     Log.d(TAG, "PIN successfully changed.");
                 }
