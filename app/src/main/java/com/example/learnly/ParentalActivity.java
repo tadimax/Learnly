@@ -166,7 +166,7 @@ public class ParentalActivity extends AppCompatActivity {
         miniAppsMap.put("Number Fun", createAppMapFromUI(switchNumberFun, spinnerNumberFun));
         miniAppsMap.put("Weekly Quiz", createAppMapFromUI(switchWeeklyQuiz, spinnerWeeklyQuiz));
 
-        user.setValue(miniAppsMap)
+        db.setValue(miniAppsMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
