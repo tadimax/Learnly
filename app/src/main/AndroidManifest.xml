@@ -46,6 +46,9 @@
         <activity
             android:name=".StoryTimeActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
+        <activity
+            android:name=".MemoryMatchActivity"
+            android:exported="false" /> <!-- Not directly launchable by other apps -->
     </application>
 
 </manifest>

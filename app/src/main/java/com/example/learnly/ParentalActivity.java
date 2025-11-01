@@ -1,3 +1,11 @@
+/*
+
+TODO: THIS FILE WILL BE REPLACED WITH KOTLIN AS AN ATTEMPT TO WORK ON LEARNING KOTLIN
+
+ */
+
+
+
 package com.example.learnly;
 
 import android.os.Bundle;

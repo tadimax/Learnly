@@ -94,9 +94,9 @@ public class HomeActivity extends AppCompatActivity {
         memoryMatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Start MemoryMatchActivity
-                // Intent intent = new Intent(HomeActivity.this, MemoryMatchActivity.class);
-                // startActivity(intent);
+
+                Intent intent = new Intent(HomeActivity.this, MemoryMatchActivity.class);
+                startActivity(intent);
                 Log.d(TAG, "Memory Match Button Clicked");
             }
         });
