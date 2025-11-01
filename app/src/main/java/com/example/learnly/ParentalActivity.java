@@ -156,7 +156,7 @@ public class ParentalActivity extends AppCompatActivity {
     // Saves all settings to the Firebase db
     private void saveParentalSettings() {
         String email = editTextParentalEmail.getText().toString().trim();
-        user.child("parentEmail").setValue(email);
+        db.child("parentEmail").setValue(email);
 
         Map<String, Object> miniAppsMap = new HashMap<>();
         miniAppsMap.put("Story Time", createAppMapFromUI(switchStoryTime, spinnerStoryTime));
