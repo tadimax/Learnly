@@ -176,22 +176,14 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     // Sends a password reset email using Firebase Auth
+// Signs the user out and sends them to the ForgotPasswordActivity
     public void changePassword(View view) {
-        if (currentUser != null && currentUser.getEmail() != null) {
-            mAuth.sendPasswordResetEmail(currentUser.getEmail())
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "Password reset email sent.");
-                            } else {
-                                Log.w(TAG, "sendPasswordResetEmail:failure", task.getException());
-                            }
-                        }
-                    });
-        } else {
-            Log.w(TAG, "User is null or has no email, cannot send password reset.");
-        }
+        mAuth.signOut();
+        Log.d(TAG, "User signed out, redirecting to ForgotPasswordActivity.");
+        Intent i = new Intent(SettingsActivity.this, ForgotPasswordActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
     }
 
     // Displays a dialog to verify the user's current (old) PIN
