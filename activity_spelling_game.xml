@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/levelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Level 1 / 10"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/promptText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clue goes here"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp" />
+
+    <!-- Answer slots -->
+    <LinearLayout
+        android:id="@+id/answerRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp" />
+
+    <!-- Letter bank -->
+    <GridLayout
+        android:id="@+id/lettersGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:columnCount="5"
+        android:rowCount="3"
+        android:useDefaultMargins="false"
+        android:layout_marginTop="12dp" />
+
+    <!-- Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnBackspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⌫" />
+
+        <Button
+            android:id="@+id/btnHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hint"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next ▶"
+            android:enabled="false"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="8dp" />
+</LinearLayout>
