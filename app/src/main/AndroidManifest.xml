@@ -51,6 +51,9 @@
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <!-- spelling activity -->
         <activity android:name=".SpellingGameActivity" android:exported="true" />
+        <activity
+            android:name=".MathActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
