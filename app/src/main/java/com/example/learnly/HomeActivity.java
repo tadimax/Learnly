@@ -114,9 +114,9 @@ public class HomeActivity extends AppCompatActivity {
         numberFunButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Start NumberFunActivity
-                // Intent intent = new Intent(HomeActivity.this, NumberFunActivity.class);
-                // startActivity(intent);
+                // This now launches your new activity
+                Intent intent = new Intent(HomeActivity.this, MathActivity.class);
+                startActivity(intent);
                 Log.d(TAG, "Number Fun Button Clicked");
             }
         });
