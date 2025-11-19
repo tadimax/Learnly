@@ -84,10 +84,8 @@ public class HomeActivity extends AppCompatActivity {
         spellingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Start SpellingTimeActivity
-                // Intent intent = new Intent(HomeActivity.this, SpellingTimeActivity.class);
-                // startActivity(intent);
-                Log.d(TAG, "Spelling Button Clicked");
+                Intent intent = new Intent(HomeActivity.this, SpellingGameActivity.class);
+                startActivity(intent);
             }
         });
 
