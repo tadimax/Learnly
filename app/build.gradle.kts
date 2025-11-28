@@ -34,6 +34,8 @@ android {
 
 dependencies {
 
+    implementation("com.airbnb.android:lottie:6.4.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -43,5 +45,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("androidx.security:security-crypto:1.0.0")
 }

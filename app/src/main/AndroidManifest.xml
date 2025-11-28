@@ -38,22 +38,22 @@
             android:name=".ForgotPasswordActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <activity
-            android:name=".ParentalActivity"
-            android:exported="false" /> <!-- Not directly launchable by other apps -->
-        <activity
             android:name=".SettingsActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <activity
             android:name=".StoryTimeActivity"
             android:exported="false" /> <!-- Not directly launchable by other apps -->
         <activity
-            android:name=".MemoryMatchActivity"
-            android:exported="false" /> <!-- Not directly launchable by other apps -->
-        <!-- spelling activity -->
-        <activity android:name=".SpellingGameActivity" android:exported="true" />
-        <activity
-            android:name=".MathActivity"
+            android:name=".SpellingGameActivity"
             android:exported="false" />
+        <activity
+            android:name=".MemoryMatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ParentalActivity"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>

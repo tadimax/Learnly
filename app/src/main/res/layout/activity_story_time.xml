@@ -1,13 +1,196 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="20dp" android:orientation="vertical">
-    <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Initializing TTS..." android:textSize="16sp" android:paddingBottom="12dp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Speech rate (0.1 – 2.5+)" android:textStyle="bold"/>
-    <SeekBar android:id="@+id/seekRate" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="30" android:progress="10"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pitch (0.1 – 2.5+)" android:textStyle="bold" android:paddingTop="12dp"/>
-    <SeekBar android:id="@+id/seekPitch" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="30" android:progress="10"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:paddingTop="20dp">
-        <Button android:id="@+id/btnPlay" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Play / Resume" android:layout_weight="1"/>
-        <Button android:id="@+id/btnPause" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Pause" android:layout_weight="1" android:layout_marginStart="12dp"/>
-        <Button android:id="@+id/btnStop" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Stop" android:layout_weight="1" android:layout_marginStart="12dp"/>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FFF8E1">
+
+    <!-- Top bar: Back + Night toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btnBackToHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="⬅ Home"
+            android:textSize="14sp"
+            android:backgroundTint="#FFCC80"
+            android:textColor="@android:color/white"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnNightMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌙 Night"
+            android:textSize="14sp"
+            android:backgroundTint="#455A64"
+            android:textColor="@android:color/white"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp" />
+
+    </LinearLayout>
+
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/storyTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mira and the Moon Door"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#5D4037"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/storyDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mira follows a firefly to a magical door in the sky."
+        android:textSize="16sp"
+        android:textColor="#6D4C41"
+        android:gravity="center"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Story selector buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnStory1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🌙 Story 1"
+            android:textSize="14sp"
+            android:backgroundTint="#BA68C8"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnStory2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="☁ Story 2"
+            android:textSize="14sp"
+            android:backgroundTint="#4FC3F7"
+            android:textColor="@android:color/white"
+            android:layout_marginHorizontal="4dp" />
+
+        <Button
+            android:id="@+id/btnStory3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🤖 Story 3"
+            android:textSize="14sp"
+            android:backgroundTint="#AED581"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <!-- Status text -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Initializing TTS..."
+        android:textSize="16sp"
+        android:textColor="#5D4037"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Rate slider -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speech rate"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <SeekBar
+        android:id="@+id/seekRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:progress="10" />
+
+    <!-- Pitch slider -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pitch"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp" />
+
+    <SeekBar
+        android:id="@+id/seekPitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:progress="10" />
+
+    <!-- Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Play / Resume"
+            android:textSize="14sp"
+            android:backgroundTint="#7E57C2"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnPause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pause"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#FF8A65"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stop"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#EC407A"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>

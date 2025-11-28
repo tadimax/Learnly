@@ -1,49 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
-    <!-- Header -->
-    <TextView
-        android:id="@+id/levelText"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FFF8E1"> <!-- soft warm background -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Level 1 / 10"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        android:gravity="start">
 
+        <Button
+            android:id="@+id/btnBackToHome"
+            android:layout_width="90dp"
+            android:layout_height="36dp"
+            android:text="⬅ Home"
+            android:textSize="14sp"
+            android:backgroundTint="#FFCC80"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+    <!-- Header: Level text -->
+    <TextView
+        android:id="@+id/levelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 1 / 3"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#5D4037"
+        android:layout_marginTop="8dp" />
+
+    <!-- Big emoji hint (picture hint for the word) -->
+    <TextView
+        android:id="@+id/emojiHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="❓"
+        android:textSize="56sp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center" />
+
+
+
+    <!-- Prompt / clue text -->
     <TextView
         android:id="@+id/promptText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Clue goes here"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#6D4C41"
+        android:gravity="center_horizontal"
         android:layout_marginTop="4dp" />
 
-    <!-- Answer slots -->
+    <!-- Answer slots row -->
     <LinearLayout
         android:id="@+id/answerRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="16dp"
+        android:padding="8dp" />
 
-    <!-- Letter bank -->
+    <!-- Letter bank grid -->
     <GridLayout
         android:id="@+id/lettersGrid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:columnCount="5"
-        android:rowCount="3"
         android:useDefaultMargins="false"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:padding="4dp" />
 
-    <!-- Controls -->
+    <!-- Control buttons row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,37 +90,53 @@
             android:id="@+id/btnBackspace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⌫" />
+            android:text="⌫"
+            android:textSize="16sp"
+            android:backgroundTint="#FF8A65"
+            android:textColor="@android:color/white"/>
 
         <Button
             android:id="@+id/btnHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hint"
-            android:layout_marginStart="8dp" />
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#4FC3F7"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reset"
-            android:layout_marginStart="8dp" />
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#AED581"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next ▶"
-            android:enabled="false"
-            android:layout_marginStart="8dp" />
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#BA68C8"
+            android:textColor="@android:color/white"
+            android:enabled="false" />
     </LinearLayout>
 
+    <!-- Result / feedback text -->
     <TextView
         android:id="@+id/resultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="#388E3C"
         android:gravity="center"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
 </LinearLayout>
