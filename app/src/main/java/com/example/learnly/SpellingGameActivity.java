@@ -401,7 +401,15 @@ public class SpellingGameActivity extends AppCompatActivity {
             lp.setMargins(dp(4), dp(4), dp(4), dp(4));
             b.setLayoutParams(lp);
 
-            b.setOnClickListener(v -> placeLetter(letter));
+            b.setOnClickListener(v -> {
+                // NEW: speak the letter out loud when tapped
+                if (letter != null) {
+                    speakLetter(letter.charValue());
+                }
+                // Existing behavior: place the letter into the next empty slot
+                placeLetter(letter);
+            });
+
             lettersGrid.addView(b);
         }
     }
@@ -532,6 +540,20 @@ public class SpellingGameActivity extends AppCompatActivity {
     private void speakHintLetter(char c) {
         if (!ttsReady) return;
         speakText("The next letter is " + c);
+    }
+
+    // NEW: Speak a single letter when a tile is tapped
+    private void speakLetter(char c) {
+        if (!ttsReady) return;
+        String text = String.valueOf(c);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts.speak(text, TextToSpeech.QUEUE_ADD, null,
+                    "letter-" + c + "-" + System.currentTimeMillis());
+        } else {
+            HashMap<String, String> params = new HashMap<>();
+            params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "letter");
+            tts.speak(text, TextToSpeech.QUEUE_ADD, params);
+        }
     }
 
     private void speakText(String text) {
@@ -688,7 +710,7 @@ public class SpellingGameActivity extends AppCompatActivity {
 
         TranslateAnimation shake = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, -0.05f,
-                Animation.RELATIVE_TO_SELF, 0.05f,
+                Animation.RELATIVE_TO_SELF,  0.05f,
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f
         );
