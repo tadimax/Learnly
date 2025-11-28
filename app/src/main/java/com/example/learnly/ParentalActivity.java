@@ -1,10 +1,6 @@
 /*
-
-TODO: THIS FILE WILL BE REPLACED WITH KOTLIN AS AN ATTEMPT TO WORK ON LEARNING KOTLIN
-
+ TODO: THIS FILE WILL BE REPLACED WITH KOTLIN AS AN ATTEMPT TO WORK ON LEARNING KOTLIN
  */
-
-
 
 package com.example.learnly;
 
@@ -17,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -27,21 +24,41 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParentalActivity extends AppCompatActivity {
     private static final String TAG = "ParentalActivity";
+
     private DatabaseReference user;
     private DatabaseReference db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
-    private SwitchMaterial switchStoryTime, switchSpellingTime, switchMemoryMatch, switchColourPatterns, switchNumberFun, switchWeeklyQuiz;
-    private Spinner spinnerStoryTime, spinnerSpellingTime, spinnerMemoryMatch, spinnerColourPatterns, spinnerNumberFun, spinnerWeeklyQuiz;
+    // Switches
+    private SwitchMaterial switchStoryTime;
+    private SwitchMaterial switchSpellingTime;
+    private SwitchMaterial switchMemoryMatch;
+    private SwitchMaterial switchColourPatterns;
+    private SwitchMaterial switchNumberFun;
+    private SwitchMaterial switchWeeklyQuiz;
+    private SwitchMaterial switchReadingPractice;   // NEW
+
+    // Spinners
+    private Spinner spinnerStoryTime;
+    private Spinner spinnerSpellingTime;
+    private Spinner spinnerMemoryMatch;
+    private Spinner spinnerColourPatterns;
+    private Spinner spinnerNumberFun;
+    private Spinner spinnerWeeklyQuiz;
+    private Spinner spinnerReadingPractice;         // NEW
+
     private EditText editTextParentalEmail;
     private Button btnSaveParental;
+
     private final String[] difficultyLevels = {"Easy", "Medium", "Hard"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +74,12 @@ public class ParentalActivity extends AppCompatActivity {
             return;
         }
 
-
         String userId = currentUser.getUid();
         user = FirebaseDatabase.getInstance().getReference("users").child(userId);
         db = user.child("miniApps");
 
         initializeUI();
-
         setupSpinners();
-
         loadParentalSettings();
 
         btnSaveParental.setOnClickListener(new View.OnClickListener() {
@@ -76,29 +90,34 @@ public class ParentalActivity extends AppCompatActivity {
         });
     }
 
-    //Just initializes all XML elements to Java variables
+    // Just initializes all XML elements to Java variables
     private void initializeUI() {
         btnSaveParental = findViewById(R.id.btnSaveParental);
         editTextParentalEmail = findViewById(R.id.editTextParentalEmail);
 
+        // Switches
         switchStoryTime = findViewById(R.id.switchStoryTime);
         switchSpellingTime = findViewById(R.id.switchSpellingTime);
         switchMemoryMatch = findViewById(R.id.switchMemoryMatch);
         switchColourPatterns = findViewById(R.id.switchColourPatterns);
         switchNumberFun = findViewById(R.id.switchNumberFun);
         switchWeeklyQuiz = findViewById(R.id.switchWeeklyQuiz);
+        switchReadingPractice = findViewById(R.id.switchReadingPractice); // NEW
 
+        // Spinners
         spinnerStoryTime = findViewById(R.id.spinnerStoryTime);
         spinnerSpellingTime = findViewById(R.id.spinnerSpellingTime);
         spinnerMemoryMatch = findViewById(R.id.spinnerMemoryMatch);
         spinnerColourPatterns = findViewById(R.id.spinnerColourPatterns);
         spinnerNumberFun = findViewById(R.id.spinnerNumberFun);
         spinnerWeeklyQuiz = findViewById(R.id.spinnerWeeklyQuiz);
+        spinnerReadingPractice = findViewById(R.id.spinnerReadingPractice); // NEW
     }
 
     // Makes the spinner adapter and applies it to all subapplications
     private void setupSpinners() {
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
+        ArrayAdapter<String> spinnerAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerStoryTime.setAdapter(spinnerAdapter);
@@ -107,6 +126,7 @@ public class ParentalActivity extends AppCompatActivity {
         spinnerColourPatterns.setAdapter(spinnerAdapter);
         spinnerNumberFun.setAdapter(spinnerAdapter);
         spinnerWeeklyQuiz.setAdapter(spinnerAdapter);
+        spinnerReadingPractice.setAdapter(spinnerAdapter); // NEW
     }
 
     // Loads the user settings from Firebase
@@ -122,12 +142,13 @@ public class ParentalActivity extends AppCompatActivity {
                 }
 
                 DataSnapshot appsSnapshot = snapshot.child("miniApps");
-                loadAppSetting(appsSnapshot, "Story Time", switchStoryTime, spinnerStoryTime);
-                loadAppSetting(appsSnapshot, "Spelling Time", switchSpellingTime, spinnerSpellingTime);
-                loadAppSetting(appsSnapshot, "Memory Match", switchMemoryMatch, spinnerMemoryMatch);
-                loadAppSetting(appsSnapshot, "Colour Patterns", switchColourPatterns, spinnerColourPatterns);
-                loadAppSetting(appsSnapshot, "Number Fun", switchNumberFun, spinnerNumberFun);
-                loadAppSetting(appsSnapshot, "Weekly Quiz", switchWeeklyQuiz, spinnerWeeklyQuiz);
+                loadAppSetting(appsSnapshot, "Story Time",        switchStoryTime,       spinnerStoryTime);
+                loadAppSetting(appsSnapshot, "Spelling Time",     switchSpellingTime,    spinnerSpellingTime);
+                loadAppSetting(appsSnapshot, "Memory Match",      switchMemoryMatch,     spinnerMemoryMatch);
+                loadAppSetting(appsSnapshot, "Colour Patterns",   switchColourPatterns,  spinnerColourPatterns);
+                loadAppSetting(appsSnapshot, "Number Fun",        switchNumberFun,       spinnerNumberFun);
+                loadAppSetting(appsSnapshot, "Weekly Quiz",       switchWeeklyQuiz,      spinnerWeeklyQuiz);
+                loadAppSetting(appsSnapshot, "Reading Practice",  switchReadingPractice, spinnerReadingPractice); // NEW
             }
 
             @Override
@@ -138,7 +159,10 @@ public class ParentalActivity extends AppCompatActivity {
     }
 
     // Helper function to load the settings for a single app
-    private void loadAppSetting(DataSnapshot appsSnapshot, String appName, SwitchMaterial appSwitch, Spinner appSpinner) {
+    private void loadAppSetting(DataSnapshot appsSnapshot,
+                                String appName,
+                                SwitchMaterial appSwitch,
+                                Spinner appSpinner) {
         if (appsSnapshot.hasChild(appName)) {
 
             Boolean isEnabled = appsSnapshot.child(appName).child("enabled").getValue(Boolean.class);
@@ -159,12 +183,13 @@ public class ParentalActivity extends AppCompatActivity {
         db.child("parentEmail").setValue(email);
 
         Map<String, Object> miniAppsMap = new HashMap<>();
-        miniAppsMap.put("Story Time", createAppMapFromUI(switchStoryTime, spinnerStoryTime));
-        miniAppsMap.put("Spelling Time", createAppMapFromUI(switchSpellingTime, spinnerSpellingTime));
-        miniAppsMap.put("Memory Match", createAppMapFromUI(switchMemoryMatch, spinnerMemoryMatch));
-        miniAppsMap.put("Colour Patterns", createAppMapFromUI(switchColourPatterns, spinnerColourPatterns));
-        miniAppsMap.put("Number Fun", createAppMapFromUI(switchNumberFun, spinnerNumberFun));
-        miniAppsMap.put("Weekly Quiz", createAppMapFromUI(switchWeeklyQuiz, spinnerWeeklyQuiz));
+        miniAppsMap.put("Story Time",       createAppMapFromUI(switchStoryTime,       spinnerStoryTime));
+        miniAppsMap.put("Spelling Time",    createAppMapFromUI(switchSpellingTime,    spinnerSpellingTime));
+        miniAppsMap.put("Memory Match",     createAppMapFromUI(switchMemoryMatch,     spinnerMemoryMatch));
+        miniAppsMap.put("Colour Patterns",  createAppMapFromUI(switchColourPatterns,  spinnerColourPatterns));
+        miniAppsMap.put("Number Fun",       createAppMapFromUI(switchNumberFun,       spinnerNumberFun));
+        miniAppsMap.put("Weekly Quiz",      createAppMapFromUI(switchWeeklyQuiz,      spinnerWeeklyQuiz));
+        miniAppsMap.put("Reading Practice", createAppMapFromUI(switchReadingPractice, spinnerReadingPractice)); // NEW
 
         db.setValue(miniAppsMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

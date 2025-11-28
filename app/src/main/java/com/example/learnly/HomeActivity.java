@@ -32,7 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference db;
     private TextView welcomeTextView;
-    private Button settingsButton, storyButton, spellingButton, memoryMatchButton, colourPatternsButton, numberFunButton, weeklyQuizButton;
+
+    private Button settingsButton, storyButton, readingPracticeButton, spellingButton, memoryMatchButton, colourPatternsButton, numberFunButton, weeklyQuizButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         colourPatternsButton = findViewById(R.id.button4);
         numberFunButton = findViewById(R.id.button5);
         weeklyQuizButton = findViewById(R.id.button6);
+        readingPracticeButton = findViewById(R.id.readingPracticeButton);
 
 
         FirebaseUser user = mAuth.getCurrentUser();
@@ -76,6 +78,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, StoryTimeActivity.class);
+                startActivity(intent);
+            }
+        });
+        readingPracticeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ReadingPracticeActivity.class);
                 startActivity(intent);
             }
         });

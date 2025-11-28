@@ -69,10 +69,10 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- SPELLING TIME -->
     <Button
@@ -88,10 +88,10 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@id/storyButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- MEMORY MATCH -->
     <Button
@@ -107,10 +107,29 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@id/button2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- READING PRACTICE -->
+    <Button
+        android:id="@+id/readingPracticeButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:text="Reading Practice"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/tile_orange_round"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/button3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- COLOUR PATTERNS -->
     <Button
@@ -126,10 +145,10 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/button3"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/readingPracticeButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- NUMBER FUN -->
     <Button
@@ -145,10 +164,10 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@id/button4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- WEEKLY QUIZ -->
     <Button
@@ -164,11 +183,11 @@
         android:backgroundTint="@null"
         app:backgroundTint="@null"
         android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintTop_toBottomOf="@id/button5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="24dp" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

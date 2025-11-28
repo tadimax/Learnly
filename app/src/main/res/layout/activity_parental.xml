@@ -46,6 +46,7 @@
             android:divider="@drawable/abc_list_divider_material"
             android:showDividers="middle">
 
+            <!-- Story Time -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -60,8 +61,9 @@
                 android:id="@+id/spinnerStoryTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Spelling Time -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -76,8 +78,26 @@
                 android:id="@+id/spinnerSpellingTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Reading Practice (NEW) -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reading Practice (Phonics)" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchReadingPractice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled" />
+            <Spinner
+                android:id="@+id/spinnerReadingPractice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Memory Match -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -92,8 +112,9 @@
                 android:id="@+id/spinnerMemoryMatch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Colour Patterns -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -108,8 +129,9 @@
                 android:id="@+id/spinnerColourPatterns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Number Fun -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -124,8 +146,9 @@
                 android:id="@+id/spinnerNumberFun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Weekly Quiz -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -140,8 +163,9 @@
                 android:id="@+id/spinnerWeeklyQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
+            <!-- Parent email -->
             <TextView
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"

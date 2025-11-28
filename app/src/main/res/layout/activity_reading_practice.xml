@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FFF8E1">
+
+    <!-- Top row: Home + level / difficulty -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btnBackToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⬅ Home"
+            android:textSize="14sp"
+            android:backgroundTint="#FFCC80"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/levelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#5D4037"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/storyTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="#5D4037"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Status / feedback (small label) -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tap READ IT and say the word!"
+        android:textSize="14sp"
+        android:textColor="#6D4C41"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="4dp" />
+
+    <!-- Big emoji hint -->
+    <TextView
+        android:id="@+id/emojiHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="❓"
+        android:textSize="64sp"
+        android:layout_marginTop="12dp" />
+
+    <!-- Word text (large) -->
+    <TextView
+        android:id="@+id/wordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CAT"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#3E2723"
+        android:layout_marginTop="4dp" />
+
+    <!-- Hint text -->
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A small pet that says meow."
+        android:textSize="16sp"
+        android:textColor="#6D4C41"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp" />
+
+    <!-- Hint + Hear Word buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hint 📣"
+            android:textSize="14sp"
+            android:backgroundTint="#4FC3F7"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnHearWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hear word 🔊"
+            android:textSize="14sp"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="#AED581"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Letter phonics row -->
+    <TextView
+        android:id="@+id/phonicsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tap each letter to hear the sound:"
+        android:textSize="16sp"
+        android:textColor="#5D4037"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/letterRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="6dp" />
+
+    <!-- Record controls -->
+    <TextView
+        android:id="@+id/readPromptText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Now you read it aloud!"
+        android:textSize="16sp"
+        android:textColor="#5D4037"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎤 Read it"
+            android:textSize="16sp"
+            android:backgroundTint="#FF8A65"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next ▶"
+            android:textSize="16sp"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="#BA68C8"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Feedback text -->
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="#388E3C"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>
